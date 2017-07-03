@@ -47,7 +47,7 @@ if Chk:					#Check if in Easter season
 	#os.system('curl -o ' + '/home/pi/icons/'+ Chk + '.txt' + 'https://raw.githubusercontent.com/aat145914/Test/master/Easter/' + Chk + '.txt')
 	os.system('curl -o ' + '/home/pi/icons/'+Chk + '.txt ' + 'https://raw.githubusercontent.com/aat145914/Test/master/' + 'Easter' + '/' + Chk + '.txt') 
 	
-	sleep(10)
+	sleep(5)		#change ver11 from 10
 	workfile = '/home/pi/icons/' + Chk + '.txt'
 	f = open(workfile, 'r')
 	
@@ -87,7 +87,7 @@ partfile = month + day
 
 os.system('curl -o ' + '/home/pi/icons/'+partfile + '.txt ' + 'https://raw.githubusercontent.com/aat145914/Test/master/' + month + '/' + partfile + '.txt') 
 
-sleep(10)	
+sleep(5)	#change ver11 from 10
 	
 workfile = '/home/pi/icons/' + month + day + '.txt'
 f = open(workfile, 'r')
