@@ -2,6 +2,13 @@ import os
 from datetime import date
 from time import sleep
 
+#ver14 new
+filelist = [ f for f in os.listdir('/home/pi/icons') if (f.endswith('ver.py'))]
+for f in filelist:
+	os.remove('/home/pi/icons/'+f) 
+if filelist:
+	os.system('sudo mv ' +'/home/pi/icons/ver2.py '+ '/home/pi/icons/ver.py')
+
 today = date.today()
 day = today.day			#testing
 month = today.month
