@@ -19,7 +19,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-#example4 4-Dec-16 added reboot button 4, also moved icons to file
 #ver 6: added daycounter that checks day so that changes if left on and passes midnight
 
 from time import sleep
@@ -55,12 +54,13 @@ today = date.today()
 day = today.day			#testing
 month = today.month
 
-#day = 26		#testing
-#month = 2 	#testing
+#day = 26				#testing
+#month = 2 				#testing
 
+#Figure out day at start of icon initialization
 dayatstart = day	
 
-from Easter import Eastercheck	#Modded for ver change
+from Easter import Eastercheck		#Mod'd for ver change
 Chk = Eastercheck()
 if Chk:
 	Chk = Chk.replace(" ", "-")
@@ -78,47 +78,51 @@ filename = '/home/pi/icons/' + month + day + "_1" + ".jpg"
 sys.stderr.write(filename)
 sys.stderr.write("\n")
 
-def fadeIn():
-        for i in range(10,101):      # 101 because it stops when it finishes 100
-                backlight.ChangeDutyCycle(i)
-                sleep(pause_time)
+def fadeIn():						#Not used
+	for i in range(10,101):      	#101 because it stops when it finishes 100
+		backlight.ChangeDutyCycle(i)
+		sleep(pause_time)
 
-def fadeOut():
-        backlight.ChangeDutyCycle(4)
+def fadeOut():						#Not used
+	backlight.ChangeDutyCycle(4)
 
-def restart():
+def restart():						#Not used
 	os.system("sudo reboot")
 
 def Easterloop(eastericon):
 	imagenum = 1
 	iconimg=''
+	#Find and load first Easter feast image
 	iconimg = '/home/pi/icons/' + eastericon + '_' + str(imagenum) + ".jpg"
 	os.system('sudo fbi -T 2 -d /dev/fb1 -noverbose ' + iconimg)
 	imagenum += 1
 	iconimg = '/home/pi/icons/' + eastericon + '_' + str(imagenum) + ".jpg"
+	#Check if second Easter feast image exists
 	firstcheck = os.path.isfile(iconimg)
 	count = 0
+	#If second image exists enter
 	if firstcheck:
 		imagenum = 1
 		while True:		
 		
 			sleep(0.25)
 			count += 0.25
-			#daycounter += 0.25
 			if count == 15.0:
 				imagenum += 1
-				print("Do something here")
+				#print("Do something here")
 				count = 0
 				print('Loading image...')
 				iconimg=''
 				iconimg = '/home/pi/icons/' + eastericon + '_' + str(imagenum) + ".jpg"
+				#Keep checking if subsequent images exits
 				check = os.path.isfile(iconimg)
-				
+				#If exists show
 				if check:
 					os.system('sudo fbi -T 2 -d /dev/fb1 -noverbose ' + iconimg)
+				#Otherwise break
 				else:		
 					break
-			
+			#Keep fuctionality of buttons during loop
 			if pitft.Button1:
 				print "Button 1 pressed - screen off"
 				os.system('sudo startx')
@@ -131,26 +135,29 @@ def Easterloop(eastericon):
 			if pitft.Button4:
 				print "Button 4 pressed"
 				os.system('sudo startx -- -layout HDMI')
-		return		#from break
-		
+		#Return from break, no more images
+		return
+	
+	#If no second image wait for 15 secons then return	
 	else:
 		while True:
 			sleep(0.25)
 			count += 0.25
-			#daycounter += 0.25
 			if count == 15.0:
 				break
 		return
-	
-	
+
+#Show day's icons first		
 imagenum = 1
 iconimg=''
 iconimg = '/home/pi/icons/' + month + day + '_' + str(imagenum) + ".jpg"
 os.system('sudo fbi -T 2 -d /dev/fb1 -noverbose ' + iconimg)
 imagenum += 1
 iconimg = '/home/pi/icons/' + month + day + '_' + str(imagenum) + ".jpg"
+#Check for subsequent day's icons
 firstcheck = os.path.isfile(iconimg)
 daycounter = 0
+#If only one day's icon and not in Easter season go into this loop 
 if (firstcheck!=True) and not Chk:
 	while True:
 		sleep(0.5)
@@ -170,10 +177,11 @@ if (firstcheck!=True) and not Chk:
 		if pitft.Button4:
 			print "Button 4 pressed"
 			os.system('sudo startx -- -layout HDMI')
+		#Check every 30 seconds if date changed
 		if (daycounter == 30):
 			today = date.today()		#testing
 			day2 = today.day			#testing
-
+			#If date changed while icon has been on, go to bottom of file where readingfromfilelnx_v re-called
 			if (day2 != dayatstart):
 				break
 			daycounter = 0
@@ -189,13 +197,13 @@ if firstcheck:
 		daycounter += 0.25
 		if count == 15.0:
 			imagenum += 1
-			print("Do something here")
+			#print("Do something here")
 			count = 0
 			print('Loading image...')
 			iconimg=''
 			iconimg = '/home/pi/icons/' + month + day + '_' + str(imagenum) + ".jpg"
 			check = os.path.isfile(iconimg)
-        
+			#If no more icons from day's icons go to else
 			if check:
 				os.system('sudo fbi -T 2 -d /dev/fb1 -noverbose ' + iconimg)
 
@@ -208,7 +216,7 @@ if firstcheck:
 				iconimg = '/home/pi/icons/' + month + day + '_' + str(imagenum) + ".jpg"
 				os.system('sudo fbi -T 2 -d /dev/fb1 -noverbose ' + iconimg)
 				print('Drawing image')
-
+		#Keep functionality
 		if pitft.Button1:
 			print "Button 1 pressed - screen off"
 			os.system('sudo startx')
@@ -228,7 +236,7 @@ if firstcheck:
 				break
 			daycounter = 0
 
-#new versioning
+#new versioning, need for recalling readingfromfilelnx_v
 pi_folder = '/home/pi/'
 workfile1 = pi_folder + 'ver.txt'
 f = open(workfile1, 'r')	
@@ -240,7 +248,5 @@ for i in f:
 	current_ver_num.append(i)
 
 s = ''.join(map(str,current_ver_num))
-current_ver_num = int(s)
-#print("Let's see version number")
-#print(current_ver_num) 
-os.system('sudo python /home/pi/icons/readingfromfilelnx_v' + str(current_ver_num) + '.py')	#from break for changing day			
+current_ver_num = int(s) 
+os.system('sudo python /home/pi/icons/readingfromfilelnx_v' + str(current_ver_num) + '.py')		#from break for changing day			

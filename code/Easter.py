@@ -26,7 +26,9 @@ def Eastercheck():
 	year = str(year)
 	files = []
 
-	#year = str(2017)  	#testing
+	#year = str(2017)  		#testing
+	
+	#Figure out what date corresponds to Easter for a given year
 	workfile = '/home/pi/Easterdate.txt'
 	f = open(workfile, 'r')
 
@@ -43,12 +45,14 @@ def Eastercheck():
 		file = str(file)
 
 	firstpart, secondpart = file[:2], file[2:]
-
+	
+	#Corresponds to beginning of lent
 	d = date(int(year), int(firstpart), int(secondpart)) - timedelta(days=48)		#48 for lent
 
 	lentmnt = d.month
 	lentday = d.day
-
+	
+	#Figure out how far current date from Easter date
 	yday = (date(int(year), int(month), int(day)) - d).days
 	print(yday)
 	
