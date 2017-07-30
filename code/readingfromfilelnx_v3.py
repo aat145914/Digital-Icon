@@ -1,3 +1,5 @@
+#Renamed repository Digital-Icon
+
 import os
 from datetime import date
 from time import sleep
@@ -73,7 +75,7 @@ for f in filelist:
 if Chk:					
 	print(Chk)
 
-	os.system('curl -o ' + '/home/pi/icons/'+Chk + '.txt ' + 'https://raw.githubusercontent.com/aat145914/Test/master/' + current_tft_res + '/' + 'Easter' + '/' + Chk + '.txt') 
+	os.system('curl -o ' + '/home/pi/icons/'+Chk + '.txt ' + 'https://raw.githubusercontent.com/aat145914/Digital-Icon/master/' + current_tft_res + '/' + 'Easter' + '/' + Chk + '.txt') 
 	
 	sleep(5)		#ver 11
 	workfile = '/home/pi/icons/' + Chk + '.txt'
@@ -97,7 +99,7 @@ if Chk:
 	j = 1
 	#D/l Easter feast icons
 	while j <= count:
-		os.system('curl -o ' + '/home/pi/icons/'+ filename + str(j) + '.jpg ' + 'https://raw.githubusercontent.com/aat145914/Test/master/' + current_tft_res +'/' +'Easter' + '/' + filename + str(j) + '.jpg') 
+		os.system('curl -o ' + '/home/pi/icons/'+ filename + str(j) + '.jpg ' + 'https://raw.githubusercontent.com/aat145914/Digital-Icon/master/' + current_tft_res +'/' +'Easter' + '/' + filename + str(j) + '.jpg') 
 		if j == count:
 			break
 		j+=1	
@@ -116,7 +118,7 @@ month = str(month)
 partfile = month + day
 
 #D/l days' icons.txt
-os.system('curl -o ' + '/home/pi/icons/'+partfile + '.txt ' + 'https://raw.githubusercontent.com/aat145914/Test/master/' + current_tft_res + '/' + month + '/' + partfile + '.txt') 
+os.system('curl -o ' + '/home/pi/icons/'+partfile + '.txt ' + 'https://raw.githubusercontent.com/aat145914/Digital-Icon/master/' + current_tft_res + '/' + month + '/' + partfile + '.txt') 
 
 sleep(5)			#ver 11
 	
@@ -141,7 +143,7 @@ filename = partfile + '_'
 j = 1
 #D/l days icons according to tft res.
 while j <= count:
-	os.system('curl -o ' + '/home/pi/icons/'+ filename + str(j) + '.jpg ' + 'https://raw.githubusercontent.com/aat145914/Test/master/' + current_tft_res +'/' + month + '/' + filename + str(j) + '.jpg') 
+	os.system('curl -o ' + '/home/pi/icons/'+ filename + str(j) + '.jpg ' + 'https://raw.githubusercontent.com/aat145914/Digital-Icon/master/' + current_tft_res +'/' + month + '/' + filename + str(j) + '.jpg') 
 	if j == count:
 		break
 	j+=1	

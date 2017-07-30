@@ -1,3 +1,4 @@
+#Rev14 Renamed repository Digital-Icon
 
 icons_folder = '/home/pi/icons/'
 pi_folder = '/home/pi/'
@@ -11,7 +12,7 @@ for f in filelist:
 	os.remove(icons_folder+f)		
 
 #D/l new ver.txt file and put in icons folder
-cmd = 'curl -o ' + icons_folder + 'ver.txt ' + 'https://raw.githubusercontent.com/aat145914/Test/master/code/ver.txt'
+cmd = 'curl -o ' + icons_folder + 'ver.txt ' + 'https://raw.githubusercontent.com/aat145914/Digital-Icon/master/code/ver.txt'
 os.system(cmd) 
 
 sleep(5)	
@@ -57,7 +58,7 @@ else:
 	
 	#update ver.py, but d/l ver2.py, will be renamed later
 	file5 = icons_folder + 'ver2.py'
-	gitfile5 = 'https://raw.githubusercontent.com/aat145914/Test/master/code/ver2.py'
+	gitfile5 = 'https://raw.githubusercontent.com/aat145914/Digital-Icon/master/code/ver2.py'
 	cmd5 = 'curl -o ' + file5 + ' ' + gitfile5
 	os.system(cmd5)
 	sleep(5)
@@ -97,20 +98,20 @@ else:
 	
 	#download new ver num .py code
 	file1 = icons_folder + 'readingfromfilelnx_v' + str(git_ver_num) + '.py'
-	gitfile1 =  'https://raw.githubusercontent.com/aat145914/Test/master/code/readingfromfilelnx_v' + str(git_ver_num) + '.py'
+	gitfile1 =  'https://raw.githubusercontent.com/aat145914/Digital-Icon/master/code/readingfromfilelnx_v' + str(git_ver_num) + '.py'
 	cmd3 = 'curl -o ' + file1 + ' ' + gitfile1
 	os.system(cmd3) 
 	sleep(5)
 	
 	file2 = pi_folder + 'Easter.py'		#ver 10
 	gitfile2 = 'Easter.py'				
-	cmd4= 'curl -o ' + file2 + ' https://raw.githubusercontent.com/aat145914/Test/master/code/' + gitfile2
+	cmd4= 'curl -o ' + file2 + ' https://raw.githubusercontent.com/aat145914/Digital-Icon/master/code/' + gitfile2
 	os.system(cmd4)
 	sleep(5)
 	
 	file3 = pi_folder + 'Display_v' + str(git_ver_num) + '.py'
 	gitfile3 = 'Display_v' + str(git_ver_num) + '.py'
-	cmd5 = 'curl -o ' + file3 + ' https://raw.githubusercontent.com/aat145914/Test/master/code/' + gitfile3 #this is example5 right now
+	cmd5 = 'curl -o ' + file3 + ' https://raw.githubusercontent.com/aat145914/Digital-Icon/master/code/' + gitfile3 #this is example5 right now
 	os.system(cmd5) 
 	sleep(5)
 	
@@ -130,7 +131,7 @@ else:
 	#look at startup.txt file for startup icons list
 	from random import randint
 	file4 = startupfolder
-	os.system('curl -o ' + file4 + 'startup.txt ' + 'https://raw.githubusercontent.com/aat145914/Test/master/code/startup/'+current_tft_res+'/startup.txt') 
+	os.system('curl -o ' + file4 + 'startup.txt ' + 'https://raw.githubusercontent.com/aat145914/Digital-Icon/master/code/startup/'+current_tft_res+'/startup.txt') 
 	sleep(5)			#ver 11
 	workfile = '/home/pi/startup/startup.txt'
 	f = open(workfile, 'r')
@@ -141,7 +142,7 @@ else:
 	j=1
 	#d/l all startup images from /code/startup/
 	while j<=count:
-		os.system('curl -o ' + '/home/pi/startup/startup_' + str(j) + '.jpg ' + 'https://raw.githubusercontent.com/aat145914/Test/master/code/startup/'+current_tft_res+'/startup_'+ str(j) + '.jpg') 
+		os.system('curl -o ' + '/home/pi/startup/startup_' + str(j) + '.jpg ' + 'https://raw.githubusercontent.com/aat145914/Digital-Icon/master/code/startup/'+current_tft_res+'/startup_'+ str(j) + '.jpg') 
 		sleep(3)
 		if j == count:
 			break
