@@ -1,4 +1,6 @@
 #Rev14 Renamed repository Digital-Icon
+#Rev15 v4, Icons V2, must keep this file named ver2 even though actually ver4, added new Saint_v file 
+
 
 icons_folder = '/home/pi/icons/'
 pi_folder = '/home/pi/'
@@ -86,6 +88,9 @@ else:
 	cmd = 'sudo rm ' + pi_folder + 'Display_v' + str(current_ver_num) + '.py'
 	os.system(cmd)
 	
+	cmd = 'sudo rm ' + pi_folder + 'Saints.py'  #NEW removal (does not exist currently ver4(git)
+	os.system(cmd)
+	
 	#Remove and update starup images in startup folder, ver 13 
 	startupfolder='/home/pi/startup/'
 	filelist = [ f for f in os.listdir(startupfolder) if (f.endswith('.jpg'))]
@@ -113,6 +118,12 @@ else:
 	gitfile3 = 'Display_v' + str(git_ver_num) + '.py'
 	cmd5 = 'curl -o ' + file3 + ' https://raw.githubusercontent.com/aat145914/Digital-Icon/master/code/' + gitfile3 #this is example5 right now
 	os.system(cmd5) 
+	sleep(5)
+	
+	file4 = pi_folder + 'Saints.py'		#this is new ver4(git), decided not to use versioning now due to later import
+	gitfile4 = 'Saints.py'
+	cmd6 = 'curl -o ' + file4 + ' https://raw.githubusercontent.com/aat145914/Digital-Icon/master/code/' + gitfile4
+	os.system(cmd6) 
 	sleep(5)
 	
 	#Check tft resolution, ver 13

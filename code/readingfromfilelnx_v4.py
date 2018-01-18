@@ -89,18 +89,18 @@ if Chk:
 			files.append(i)
 			
 	print(files)
-	count = 0
+	count = 0						#now starts at 0, ver4
 	#Count number of Easter feast .jpgs to d/l
 	for file in files:
 		count+=1
 		print(file)		
 		
 	filename = Chk + '_'
-	j = 1
+	j = 0							#now starts at 0, ver4
 	#D/l Easter feast icons
-	while j <= count:
+	while j < count:				#now < not <=, ver4
 		os.system('curl -o ' + '/home/pi/icons/'+ filename + str(j) + '.jpg ' + 'https://raw.githubusercontent.com/aat145914/Digital-Icon/master/' + current_tft_res +'/' +'Easter' + '/' + filename + str(j) + '.jpg') 
-		if j == count:
+		if j == (count-1):			#now count-1 from count, ver4
 			break
 		j+=1	
 
@@ -133,20 +133,9 @@ for i in f:
         files.append(i)
 
 print(files)
-count = 0
-#Count number of days' icons
-for file in files:
-	count+=1
-	print(file)
 
-filename = partfile + '_'
-j = 1
-#D/l days icons according to tft res.
-while j <= count:
-	os.system('curl -o ' + '/home/pi/icons/'+ filename + str(j) + '.jpg ' + 'https://raw.githubusercontent.com/aat145914/Digital-Icon/master/' + current_tft_res +'/' + month + '/' + filename + str(j) + '.jpg') 
-	if j == count:
-		break
-	j+=1	
+for file in files:
+	os.system('curl -o ' + '/home/pi/icons/'+ file + ' ' + 'https://raw.githubusercontent.com/aat145914/Digital-Icon/master/' + current_tft_res +'/' + month + '/' + file) 
 
 #Call Display_v(current_ver_num)	
 file = '/home/pi/Display_v' + str(current_ver_num) + '.py'

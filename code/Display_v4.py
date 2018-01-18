@@ -20,6 +20,7 @@
 # THE SOFTWARE.
 
 #ver 6: added daycounter that checks day so that changes if left on and passes midnight
+#ver4 (git)
 
 from time import sleep
 
@@ -54,29 +55,41 @@ today = date.today()
 day = today.day			#testing
 month = today.month
 
-#day = 26				#testing
-#month = 2 				#testing
+#TESTING
+#day = 17				#testing
+#month = 1 				#testing
 
 #Figure out day at start of icon initialization
-dayatstart = day	
+#TESTING 
+dayatstart = day
+#dayatstart = 17
 
 from Easter import Eastercheck		#Mod'd for ver change
 Chk = Eastercheck()
+
+from Saints import months
+month_of_year = months[month-1]	
+
 if Chk:
 	Chk = Chk.replace(" ", "-")
 
 if day<10:
-	day = str(day)
-	day = "0" + day
+	day = "0" + str(day)
 if month<10:
-	month = str(month)
-	month = "0" + month
+	month = "0" + str(month)
 day = str(day)
+str_month_day = month + day #"0117"
 
-month = str(month)	
-filename = '/home/pi/icons/' + month + day + "_1" + ".jpg"
-sys.stderr.write(filename)
-sys.stderr.write("\n")
+#print(str_month_day)
+tuple_of_day = month_of_year[str_month_day]
+#print(tuple_of_day)
+
+#Need this to make dictionary of saints:#oficons
+no_of_saints = {}
+saint = 1
+for num in tuple_of_day:
+	no_of_saints.update({saint:num})
+	saint += 1
 
 def fadeIn():						#Not used
 	for i in range(10,101):      	#101 because it stops when it finishes 100
@@ -90,7 +103,7 @@ def restart():						#Not used
 	os.system("sudo reboot")
 
 def Easterloop(eastericon):
-	imagenum = 1
+	imagenum = 0					#changed from 1 to 0, ver4
 	iconimg=''
 	#Find and load first Easter feast image
 	iconimg = '/home/pi/icons/' + eastericon + '_' + str(imagenum) + ".jpg"
@@ -101,8 +114,8 @@ def Easterloop(eastericon):
 	firstcheck = os.path.isfile(iconimg)
 	count = 0
 	#If second image exists enter
-	if firstcheck:
-		imagenum = 1
+	if firstcheck:					
+		imagenum = 0				#changed from 1 to 0, ver4
 		while True:		
 		
 			sleep(0.25)
@@ -147,94 +160,74 @@ def Easterloop(eastericon):
 				break
 		return
 
-#Show day's icons first		
-imagenum = 1
-iconimg=''
-iconimg = '/home/pi/icons/' + month + day + '_' + str(imagenum) + ".jpg"
-os.system('sudo fbi -T 2 -d /dev/fb1 -noverbose ' + iconimg)
-imagenum += 1
-iconimg = '/home/pi/icons/' + month + day + '_' + str(imagenum) + ".jpg"
-#Check for subsequent day's icons
-firstcheck = os.path.isfile(iconimg)
-daycounter = 0
-#If only one day's icon and not in Easter season go into this loop 
-if (firstcheck!=True) and not Chk:
-	while True:
-		sleep(0.5)
-		daycounter += 0.5
-		if pitft.Button1:
-			print "Button 1 pressed - screen off"
-			os.system('sudo startx')
-
-		if pitft.Button2:
-			print "Button 2 pressed - screen on"
-			os.system('sudo startx -- -layout HDMI')
-
-		if pitft.Button3:
-			print "Button 3 pressed"
-			os.system('sudo startx -- -layout HDMI')
 		
-		if pitft.Button4:
-			print "Button 4 pressed"
-			os.system('sudo startx -- -layout HDMI')
-		#Check every 30 seconds if date changed
-		if (daycounter == 30):
-			today = date.today()		#testing
-			day2 = today.day			#testing
-			#If date changed while icon has been on, go to bottom of file where readingfromfilelnx_v re-called
-			if (day2 != dayatstart):
-				break
-			daycounter = 0
 	
+		
+#Show day's icons first		
+imagenum = 0					#changed from 1 to 0, ver4
+		
 count = 0
 daycounter = 0
-imagenum = 1 
-if firstcheck:
-	while True:		
-		
-		sleep(0.25)
-		count += 0.25
-		daycounter += 0.25
-		if count == 15.0:
-			imagenum += 1
-			#print("Do something here")
-			count = 0
-			print('Loading image...')
-			iconimg=''
-			iconimg = '/home/pi/icons/' + month + day + '_' + str(imagenum) + ".jpg"
-			check = os.path.isfile(iconimg)
-			#If no more icons from day's icons go to else
-			if check:
-				os.system('sudo fbi -T 2 -d /dev/fb1 -noverbose ' + iconimg)
+#imagenum = 0 			#changed from 1 to 0, ver4
+#if firstcheck:
 
-			else:		
-				if Chk:
-					Easterloop(Chk)
-				imagenum = 1
+while True:
+	if Chk:
+		Easterloop(Chk)
+	 
+	for saint_no, icons in no_of_saints.items():
+		number_of_icons = 0
+		iconimg=''
+		iconimg = '/home/pi/icons/' + month + day + '_0' + str(saint_no) + '_0' + str(number_of_icons) + '.jpg'
+		os.system('sudo fbi -T 2 -d /dev/fb1 -noverbose ' + iconimg)
+
+		count=0
+		sleep(0.25)
+		while (True):
+			
+			sleep(0.25)
+			count += 0.25
+			daycounter += 0.25
+			
+			if (count == 15.0) :
+				
+				number_of_icons = int(number_of_icons) + 1
+				if(number_of_icons == (icons+1)):
+					count=0
+					break
+				if number_of_icons<10:
+					number_of_icons = "0"+str(number_of_icons)
+				else:
+					number_of_icons = str(number_of_icons)
+				
+				print(number_of_icons)
 				count = 0
-				iconimg=''
-				iconimg = '/home/pi/icons/' + month + day + '_' + str(imagenum) + ".jpg"
+				print('Loading image...')
+				
+				iconimg = '/home/pi/icons/' + month + day + '_0' + str(saint_no) + '_' + str(number_of_icons) + '.jpg'
+
 				os.system('sudo fbi -T 2 -d /dev/fb1 -noverbose ' + iconimg)
-				print('Drawing image')
-		#Keep functionality
-		if pitft.Button1:
-			print "Button 1 pressed - screen off"
-			os.system('sudo startx')
-		if pitft.Button2:
-			print "Button 2 pressed - screen on"
-			os.system('sudo startx -- -layout HDMI')
-		if pitft.Button3:
-			print "Button 3 pressed"
-			os.system('sudo startx -- -layout HDMI')
-		if pitft.Button4:
-			print "Button 4 pressed"
-			os.system('sudo startx -- -layout HDMI')
-		if (daycounter== 30):
-			today = date.today()		#comment out next 4 lines for Easter check
-			day2 = today.day
-			if (day2 != dayatstart):
-				break
-			daycounter = 0
+	
+			if pitft.Button1:
+				print "Button 1 pressed - screen off"
+				os.system('sudo startx')
+			if pitft.Button2:
+				print "Button 2 pressed - screen on"
+				os.system('sudo startx -- -layout HDMI')
+			if pitft.Button3:
+				print "Button 3 pressed"
+				os.system('sudo startx -- -layout HDMI')
+			if pitft.Button4:
+				print "Button 4 pressed"
+				os.system('sudo startx -- -layout HDMI')
+			if (daycounter > 30):
+				today = date.today()		#comment out next 4 lines for Easter check
+				day2 = today.day
+				#TESTING
+				#day2 = 17
+				if (day2 != dayatstart):
+					break
+				daycounter = 0
 
 #new versioning, need for recalling readingfromfilelnx_v
 pi_folder = '/home/pi/'

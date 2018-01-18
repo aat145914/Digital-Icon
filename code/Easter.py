@@ -1,3 +1,5 @@
+#ver4 removed St(.) to just St
+
 import sys
 import os
 from datetime import date, timedelta
@@ -68,6 +70,9 @@ def Eastercheck():
 		if (date(int(year), int(month), int(day)) - d).days == -15:
 			print("Prelent 3rd Sunday Prodigal Son")
 			return "Prelent 3rd Sunday Prodigal Son"
+		if (date(int(year), int(month), int(day)) - d).days == -9:
+			print("Saturday of the Dead")
+			return "Saturday of the Dead"
 		if (date(int(year), int(month), int(day)) - d).days == -8:
 			print("Prelent 4th Sunday Last Judgement")	
 			return "Prelent 4th Sunday Last Judgement"
@@ -83,26 +88,26 @@ def Eastercheck():
 			print("Clean Monday Lent Begins") 
 			return "Clean Monday Lent Begins"
 		if (date(int(year), int(month), int(day)) - d).days == 5:
-			print("1st Saturday St. Theodore Saturday")
-			return "1st Saturday St. Theodore Saturday"
+			print("1st Saturday St Theodore Saturday")
+			return "1st Saturday St Theodore Saturday"
 		if (date(int(year), int(month), int(day)) - d).days == 6:
 			print("1st Sunday of Orthodoxy")				#1st Sunday of Great Lent
 			return "1st Sunday of Orthodoxy"
 		if (date(int(year), int(month), int(day)) - d).days == 13:
-			print("2nd Sunday St. Gregory Palamas") 		#2nd Sunday of Great Lent
-			return "2nd Sunday St. Gregory Palamas"
+			print("2nd Sunday St Gregory Palamas") 		#2nd Sunday of Great Lent
+			return "2nd Sunday St Gregory Palamas"
 		if (date(int(year), int(month), int(day)) - d).days == 20:
 			print("3rd Sunday Veneration of the Cross") 	#3rd Sunday of Great Lent
 			return "3rd Sunday Veneration of the Cross"
 		if (date(int(year), int(month), int(day)) - d).days == 27:
-			print("4th Sunday St. John Climacus") 			#4th Sunday of Great Lent
-			return "4th Sunday St. John Climacus"
+			print("4th Sunday St John Climacus") 			#4th Sunday of Great Lent
+			return "4th Sunday St John Climacus"
 		if (date(int(year), int(month), int(day)) - d).days == 33:
 			print("5th Saturday the Theotokos Akathist") 
 			return "5th Saturday the Theotokos Akathist"
 		if (date(int(year), int(month), int(day)) - d).days == 34:
-			print("5th Sunday St. Mary of Egypt") 			#5th Sunday of Great Lent	
-			return "5th Sunday St. Mary of Egypt"
+			print("5th Sunday St Mary of Egypt") 			#5th Sunday of Great Lent	
+			return "5th Sunday St Mary of Egypt"
 		if (date(int(year), int(month), int(day)) - d).days == 40:
 			print("6th Saturday Lazarus") 
 			return "6th Saturday Lazarus"
@@ -159,6 +164,9 @@ def Eastercheck():
 		if (date(int(year), int(month), int(day)) - d).days == 90:			#7th Sunday of Easter	
 			print("Seventh Sunday of Pascha Sunday of the Holy Fathers")
 			return "Seventh Sunday of Pascha Sunday of the Holy Fathers"
+		if (date(int(year), int(month), int(day)) - d).days == 96:
+			print("Saturday of the Dead")
+			return "Saturday of the Dead"	
 		if (date(int(year), int(month), int(day)) - d).days == 97:
 			print("Pentecost 50 days since Pascha")
 			return "Pentecost 50 days since Pascha"
