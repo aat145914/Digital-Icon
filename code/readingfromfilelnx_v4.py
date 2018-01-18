@@ -16,7 +16,7 @@ if filelist1:
 		os.system('sudo mv ' +'/home/pi/icons/ver2.py '+ '/home/pi/icons/ver.py')
 
 #New instead of adding in ver2.py		
-#pi_folder = '/home/pi/'		
+pi_folder = '/home/pi/'		
 file4 = pi_folder + 'Saints.py'		
 gitfile4 = 'Saints.py'
 cmd6 = 'curl -o ' + file4 + ' https://raw.githubusercontent.com/aat145914/Digital-Icon/master/code/' + gitfile4
