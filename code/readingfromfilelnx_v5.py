@@ -97,6 +97,10 @@ if filelist1:
 	cmd8 = 'curl -o ' + file6 + ' https://raw.githubusercontent.com/aat145914/Digital-Icon/master/code/' + gitfile6
 	os.system(cmd8) 
 	sleep(5)
+	#need to add this
+	cmd9 = 'chmod +x /home/pi/startup.sh'
+	os.system(cmd9)
+	sleep(1)
 	
 
 import sys
