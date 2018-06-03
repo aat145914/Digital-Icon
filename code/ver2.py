@@ -9,10 +9,11 @@ pi_folder = '/home/pi/'
 import os
 from time import sleep
 
+#REMOVE GIT V5
 #Look for icons.txt file and remove 
-filelist = [ f for f in os.listdir(icons_folder) if (f.endswith('.txt'))]		
-for f in filelist:
-	os.remove(icons_folder+f)		
+#filelist = [ f for f in os.listdir(icons_folder) if (f.endswith('.txt'))]		
+#for f in filelist:
+#	os.remove(icons_folder+f)		
 
 #D/l new ver.txt file and put in icons folder
 cmd = 'curl -o ' + icons_folder + 'ver.txt ' + 'https://raw.githubusercontent.com/aat145914/Digital-Icon/master/code/ver.txt'
