@@ -1,9 +1,8 @@
 #!/bin/bash
-# My first script
 
 x=0
 proceed=0
-#for i in 0;  #for i in 0 1; 
+ 
 while [ $x -le 100 ]
 do
 	if [  "$(ping -c 1 8.8.8.8)" ]; then
@@ -16,40 +15,26 @@ do
 done
 
 
-#do
-#	if !  [  "$(ping -c 1 8.8.8.8)" ]; then
-#		sudo ifdown wlan0
-#		sleep 4
-#		sudo ifup wlan0
-#		sleep 12 #instead of 15 #30 worked 
-#		echo Network problems
-#	else
-#		echo Network connected
-#		proceed=1
-#	fi
-#done
-
-#works#proceed=1
-#echo The counter is $i
-
-#works#if [ $proceed -eq 0 ]; then
 if [ $proceed -eq 1 ]; then
-	#return
-	#sudo python example4.py
+
+	#1st fix for clock syncing
+	#sudo service ntp stop
+	#sudo ntpdate -s time.nist.gov
+	#sudo service ntp start
+
+	#2nd fix for clock syncing
+	sudo dpkg-reconfigure ntp
+
 	cd /
-	#cd home/pi/				#working but old ver.
-	#sudo python example5.py	#working but old ver.
+
 	cd home/pi/icons/
 	
-	sudo python ver.py 	#testing#readingfromfilelnx.py
-	#echo here
+	sudo python ver.py 	
+
 	cd /
 else
-	#echo there
+	
 	sudo startx
 fi
 
-#cd /
-#cd home/pi/bin
-#sudo python example4.py
-#cd /
+
