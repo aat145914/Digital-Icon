@@ -85,6 +85,7 @@ if day<10:
 if month<10:
 	month = "0" + str(month)
 day = str(day)
+month = str(month)
 str_month_day = month + day #"0117"
 
 #print(str_month_day)
